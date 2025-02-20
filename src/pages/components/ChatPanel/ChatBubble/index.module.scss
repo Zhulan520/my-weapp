@@ -1,0 +1,81 @@
+.bubbleContainer {
+  margin: 16rpx 0;
+  position: relative;
+  
+  &.user {
+    flex-direction: row-reverse;
+    
+    .bubbleBody {
+      background: #07C160;
+      border-radius: 24rpx 24rpx 4rpx 24rpx;
+    }
+    
+    .copyBtn {
+      left: -44rpx;
+    }
+  }
+
+  &.ai {
+    .bubble-body {
+      background: #FFFFFF;
+      border: 1rpx solid #E5E5E5;
+      border-radius: 24rpx 24rpx 24rpx 4rpx;
+    }
+    
+    .copyBtn {
+      right: -44rpx;
+    }
+  }
+
+  .bubbleBody {
+    max-width: 80%;
+    padding: 24rpx;
+    position: relative;
+    
+    .contentText {
+      font-size: 28rpx;
+      line-height: 1.6;
+      color: inherit;
+    }
+  }
+
+  .copyBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    
+    .iconCopy {
+      color: white;
+      font-size: 32rpx;
+    }
+  }
+
+  &:hover .copyBtn {
+    opacity: 1;
+  }
+
+  .timeTip {
+    position: absolute;
+    top: -40rpx;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8rpx 16rpx;
+    border-radius: 8rpx;
+    font-size: 20rpx;
+    opacity: 0;
+    transition: opacity 0.3s;
+    
+    &.visible {
+      opacity: 1;
+    }
+  }
+}

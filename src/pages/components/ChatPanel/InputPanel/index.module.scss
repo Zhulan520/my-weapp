@@ -1,0 +1,51 @@
+.container {
+  padding: 16rpx 24rpx;
+  background: #f5f5f5;
+  display: flex;
+  align-items: flex-end;
+  border-top: 1rpx solid #eee;
+  
+  &.ios {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+.textarea {
+  flex: 1;
+  min-height: 72rpx;
+  max-height: 200rpx;
+  padding: 16rpx 24rpx;
+  background: #fff;
+  border-radius: 48rpx;
+  font-size: 28rpx;
+  transition: all 0.3s;
+  
+  &:focus {
+    box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  }
+}
+
+.placeholder {
+  color: #999;
+}
+
+.button {
+  margin-left: 24rpx;
+  width: 120rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 40rpx;
+  background: #07c160;
+  color: white;
+  font-size: 28rpx;
+  transition: opacity 0.2s;
+  
+  &[disabled] {
+    background: #ddd;
+    color: #666;
+  }
+}
+
+.buttonHover {
+  opacity: 0.8;
+}

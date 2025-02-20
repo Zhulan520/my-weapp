@@ -1,6 +1,7 @@
 import { View, Text } from '@tarojs/components'
 import { useLoad } from '@tarojs/taro'
-import styles from './index.module.scss' 
+import ChatPanel from '../components/ChatPanel'
+import styles from './index.module.scss'
 
 export default function Index () {
   useLoad(() => {
@@ -8,8 +9,8 @@ export default function Index () {
   })
 
   return (
-    <View  >
-      <Text className={styles.color}>Hello world你好</Text>
-    </View>
+<View className={styles.body}>
+    <ChatPanel />
+  </View>
   )
 }
