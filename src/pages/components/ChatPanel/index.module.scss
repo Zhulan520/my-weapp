@@ -9,7 +9,6 @@
 
 .scrollView {
   padding-bottom: 200rpx;
-
 }
 
 .inputContainer {
@@ -23,9 +22,8 @@
   align-items: center;
   justify-content: center;
 
-
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -24rpx;
     left: 0;
@@ -33,25 +31,25 @@
     height: 24rpx;
   }
 
-.input {
-  flex:1;
-  border-radius: 48rpx;
-  font-size: 28rpx;
-  transition: all 0.3s;
-  padding:20rpx;
-  // 背景色渐变 从#209090到#2777BF
-  background: linear-gradient(to right, #209090 0%, #2777BF 100%);
-  color:#fff;
-}
-  .placeholder{
-  color: #fff;
+  .input {
+    flex: 1;
+    border-radius: 48rpx;
+    font-size: 28rpx;
+    transition: all 0.3s;
+    padding: 20rpx;
+    // 背景色渐变 从#209090到#2777BF
+    background: linear-gradient(to right, #209090 0%, #2777bf 100%);
+    color: #fff;
+  }
+  .placeholder {
+    color: #fff;
   }
 
-  .sendBtn{
+  .sendBtn {
     margin-left: 20rpx;
     background-color: #209090;
     color: white;
     border-radius: 50px;
-    padding: 0rpx 40rpx ;
+    padding: 0rpx 40rpx;
   }
 }
