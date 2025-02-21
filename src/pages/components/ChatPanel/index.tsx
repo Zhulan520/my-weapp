@@ -1,34 +1,79 @@
 // src/components/fixed-input/index.tsx
 import Taro from '@tarojs/taro'
-import { View, Input, ScrollView, Button } from '@tarojs/components'
-import { useState,  } from 'react'
+import { Message } from '@/type'
+import { handleRequest } from '@/services/utils'
+import { View, Input, ScrollView, Button, Text, ScrollViewProps, } from '@tarojs/components'
+import { useRef, useState, } from 'react'
+
 import styles from './index.module.scss'
 
 export default function FixedInput() {
   const [inputFocusHeight, setInputFocusHeight] = useState(0)
+  const [inputMsg, setInputMsg] = useState('')
+  const [messages, setMessages] = useState<Message[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const scrollViewRef = useRef<any>(null)
+  const [scrollTop, setScrollTop] = useState(10000)
 
+
+  // 键盘高度变化监听
   Taro.onKeyboardHeightChange(res => {
-    console.log(res.height, 'keyboardHeight')
     setInputFocusHeight(res.height)
   })
+
+  // 发送消息
+  const handleSend = async () => {
+    if (!inputMsg.trim() || isLoading) return
+
+    try {
+      setIsLoading(true)
+      const newMessages: Message[] = [...messages, { role: 'user', content: inputMsg }]
+      setMessages(newMessages)
+      setInputMsg('')
+
+      const response: any = await handleRequest(newMessages)
+      setMessages(prev => [...prev, { role: 'assistant', content: response?.data?.message?.content }])
+      setScrollTop(newMessages.length * 10000)
+    } catch (error) {
+      console.error('API错误详情:', error.response?.data || error.message)
+
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+
   return (
     <View className={styles.wrapper}>
       {/* 消息滚动区域 */}
       <ScrollView
         className={styles.scrollView}
-
+        ref={scrollViewRef}
+        scrollWithAnimation
+        scrollTop={scrollTop}
+        scrollY
+        enhanced
+        showScrollbar
       >
-        <Button className='btn-max-w' plain type='primary'>按钮</Button>
-        <Button className='btn-max-w' plain type='primary'>按钮</Button>
-        <Button className='btn-max-w' plain type='primary'>按钮</Button>
- 
-
+        {messages.map((msg, index) => (
+          <View
+            key={index}
+            className={msg.role === 'user' ? styles.userBubble : styles.aiBubble}
+          >
+            <Text className={styles.messageText}>{msg.content}</Text>
+          </View>
+        ))}
+        {isLoading && (
+          <View className={styles.loading}>
+            <Text className={styles.loadingText}>AI正在思考中...</Text>
+          </View>
+        )}
       </ScrollView>
 
-      {/* 固定输入框 */}
-      <View 
+      {/* 固定在底部的输入框 */}
+      <View
         className={styles.inputContainer}
-        style={{marginBottom:inputFocusHeight}}
+        style={{ marginBottom: inputFocusHeight }}
       >
         <Input
           className={styles.input}
@@ -36,8 +81,13 @@ export default function FixedInput() {
           adjustPosition={false}
           cursorSpacing={40}
           placeholderClass={styles.placeholder}
+          onConfirm={handleSend}
+          value={inputMsg}
+          onInput={e => setInputMsg(e.detail.value)}
+
+          disabled={isLoading}
         />
-        <Button className={styles.sendBtn}  >发送</Button>
+        <Button className={styles.sendBtn} onClick={handleSend}  > {isLoading ? '发送中...' : '发送'}</Button>
       </View>
     </View>
   )
