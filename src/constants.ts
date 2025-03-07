@@ -3,9 +3,9 @@
 
 // 模拟回复库
 
-export const FirstName = ["你", "you", "YOU",]
+export const FirstName = ["你"]
 export const SecondName = ["真的", "只能", "绝对", "根本", "确实", "简直", "完全", "肯定", "分明", "必须", "活脱脱", "毫无疑问",  "铁定", "彻头彻尾", "天生", "百分之百"];
-export const ThirdName = ["是", "变成", "活像",  "等于"]
+export const ThirdName = ["是", "变成", "活像",  "等于","上辈子"]
 export const LastName = [
   // 主要角色
   "唐僧", "孙悟空", "猪八戒", "沙悟净", "白龙马",

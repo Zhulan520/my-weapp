@@ -2,10 +2,12 @@
 import Taro from '@tarojs/taro'
 import { Message } from '@/type'
 import { handleRequest } from '@/services/utils'
-import { View, Input, ScrollView, Button, Text, ScrollViewProps, } from '@tarojs/components'
+import { View, Input, ScrollView, Button, Text, Icon, } from '@tarojs/components'
 import { useRef, useState, } from 'react'
 
 import styles from './index.module.scss'
+import { getUserAvatar } from './utils'
+
 
 export default function FixedInput() {
   const [inputFocusHeight, setInputFocusHeight] = useState(0)
@@ -23,6 +25,10 @@ export default function FixedInput() {
 
   // 发送消息
   const handleSend = async () => {
+    // 获取用户头像
+    const avatarUrl = await getUserAvatar();
+
+
     if (!inputMsg.trim() || isLoading) return
 
     try {
@@ -45,6 +51,10 @@ export default function FixedInput() {
 
   return (
     <View className={styles.wrapper}>
+      <View className={styles.header}  >
+        <Icon size={20} type='waiting' color='#6CBAA7' onClick={() => { }} />
+        <Icon size={20} type='clear' color='#6CBAA7' onClick={() => { setMessages([]) }} />
+      </View>
       {/* 消息滚动区域 */}
       <ScrollView
         className={styles.scrollView}

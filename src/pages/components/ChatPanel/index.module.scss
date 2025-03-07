@@ -6,6 +6,13 @@
   width: 100%;
   padding: 24rpx;
   background-image: linear-gradient(to right bottom, #15191C, #1E7AC2);
+  .header{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20rpx 0;
+  }
 }
 
 .scrollView {
@@ -33,7 +40,9 @@
       background-color: #2777bf;
     }
   }
-
+.loadingText{
+  color: #fff;
+}
 
 }
 
